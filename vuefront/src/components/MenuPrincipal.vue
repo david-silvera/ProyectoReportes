@@ -11,9 +11,9 @@
 
     <nav class="nav">
       <button class="nav-button" @click="irInicio">Inicio</button>
-      <button class="nav-button">Crear noticia</button>
-      <button class="nav-button">Mis noticias</button>
-      <button class="nav-button">Otras</button>
+      <button class="nav-button" @click="irCrearNoticias">Crear noticia</button>
+      <button class="nav-button" @click="irMisNoticias">Mis noticias</button>
+      <router-link to="/"><button class="nav-button">Cerrar Sesion</button></router-link>
     </nav>
   </div>
 </template>
@@ -29,6 +29,10 @@ export default {
     apellido: {
       type: String,
       default: ''
+    },
+     idusuario: {
+      type: Number,
+      default: 0
     }
   },
   methods: {
@@ -37,7 +41,28 @@ export default {
         name: 'vistaprincipal', 
         query: {
           nombre: this.nombre,
-          apellido: this.apellido
+          apellido: this.apellido,
+          idusuario:this.idusuario
+        }
+      });
+    },
+    irMisNoticias() {
+    this.$router.push({
+      name: 'misnoticias',
+      query: {
+        nombre: this.nombre,
+        apellido: this.apellido,
+        idusuario: this.idusuario
+      }
+    });
+   },
+    irCrearNoticias() {
+      this.$router.push({
+        name: 'crearnoticia', 
+        query: {
+          nombre: this.nombre,
+          apellido: this.apellido,
+          idusuario: this.idusuario
         }
       });
     }

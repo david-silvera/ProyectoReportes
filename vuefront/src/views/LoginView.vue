@@ -56,7 +56,7 @@ export default {
         query: {
             nombre: user.nombre,
             apellido: user.apellido,
-            id: user.id
+            idusuario: user.id
             }
       });
       }else {
