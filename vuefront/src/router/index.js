@@ -4,6 +4,7 @@ import VistaPrincipal from '@/views/VistaPrincipal.vue'
 import DetalleIncidenteView from '@/views/DetalleIncidenteView.vue'
 import MisNoticiasView from '@/views/MisNoticiasView.vue'
 import CrearNoticiaView from '@/views/CrearNoticiaView.vue'
+import RegistroView from '@/views/RegistroView.vue'
 
 
 const routes = [
@@ -33,6 +34,11 @@ const routes = [
   path: '/crearnoticia',
   name: 'crearnoticia',
   component: CrearNoticiaView
+},
+{
+  path: '/resgistro',
+  name: 'registroview',
+  component: RegistroView
 },
 {
     path: '/about',

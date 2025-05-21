@@ -10,39 +10,41 @@
   
         <button type="submit" class="login-btn">Ingresar</button>
       </form>
-      <div class="register-link">
-        ¿No tienes cuenta?
-        <a href="#">Regístrate aquí</a>
-      </div>
+     <div class="register-link">
+      ¿No tienes cuenta?
+      <a @click.prevent="$router.push({ name: 'registroview' })" href="#">Regístrate aquí</a>
+    </div>
     </div>
   </template>
   
   <script>
+
 export default {
   name: 'LoginView',
   data() {
     return {
       username: '',
       password: '',
-      usuarios: [ 
-        {
-          id: 1,
-          nombre: 'Frank',
-          apellido: 'Maldonado',
-          username: 'frank',
-          contraseña: '1234'
-        },
-        {
-          id: 2,
-          nombre: 'Steven',
-          apellido: 'Barrios',
-          username: 'steven',
-          contraseña: '12345'
-        }
-      ]
+      usuarios:[]
     };
   },
   methods: {
+    getAllUsuarios: async function(){
+      let url="http://localhost:5272/api/Usuario";
+      let vue = this;
+      await this.axios
+      .get(url)
+      .then(function (response){
+        vue.usuarios = response.data;
+        console.log(vue.usuarios);
+        this.usuarios = response.data;
+      })
+      .catch(function(error){
+        console.log(error)
+      })
+      .finally(function(){});
+    },
+    
     login(event) {
       event.preventDefault(); 
       const user = this.usuarios.find(
@@ -60,9 +62,12 @@ export default {
             }
       });
       }else {
-        this.error = 'Usuario o contraseña incorrectos';
+        alert( 'Usuario o contraseña incorrectos');
       }
-    }
+    },
+  },
+  created: function(){
+    this.getAllUsuarios();
   }
 };
 </script>

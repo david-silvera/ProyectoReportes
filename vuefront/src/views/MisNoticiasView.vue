@@ -6,18 +6,21 @@
 
     <main class="contenedor-cartas">
       <div
-        class="tarjeta"
-        v-for="(incidente, index) in misIncidentes"
-        :key="index"
-        @click="abrirModal(incidente, index)"
-      >
-        <img :src="incidente.imagen" alt="Imagen del incidente" />
-        <div class="contenido">
-          <h3>{{ incidente.lugar }}</h3>
-          <p class="fecha">{{ incidente.fecha }}</p>
-          <p class="descripcion">{{ incidente.descripcion_breve }}</p>
-        </div>
+      class="tarjeta"
+      v-for="(incidente, index) in incidentes"
+      :key="index"
+    >
+      <img :src="incidente.imagen" alt="Imagen del incidente" />
+      <div class="contenido">
+        <h3>{{ incidente.lugar }}</h3>
+        <p class="fecha">{{ incidente.fecha }}</p>
+        <p class="descripcion">{{ incidente.descripcion_breve }}</p>
       </div>
+      <div class="acciones">
+        <button @click="abrirModal(incidente, index)">Editar</button>
+        <button class="eliminar" @click="eliminarNoticia(incidente.id, index)">Eliminar</button>
+      </div>
+  </div>
     </main>
 
     <div v-if="modalVisible" class="modal-overlay" @click.self="cerrarModal">
@@ -38,11 +41,11 @@
           </label>
           <label>
             Descripción Breve:
-            <textarea v-model="incidenteSeleccionado.descripcion_breve" required></textarea>
+            <textarea v-model="incidenteSeleccionado.descripcionBreve" required></textarea>
           </label>
           <label>
             Descripción Ampliada:
-            <textarea v-model="incidenteSeleccionado.descripcion_ampliada" required></textarea>
+            <textarea v-model="incidenteSeleccionado.descripcionAmpliada" required></textarea>
           </label>
           <label>
             URL Imagen:
@@ -76,44 +79,28 @@ export default {
     },
     idusuario() {
       return Number(this.$route.query.idusuario);
-    },
-    misIncidentes() {
-      return this.incidentes.filter(
-        incidente => incidente.id_usuario === this.idusuario
-      );
     }
   },
   data() {
     return {
-      incidentes: [
-        {
-          id_usuario: 1,
-          lugar: 'Barrio El Prado',
-          ciudad: 'Santa Marta',
-          descripcion_breve: 'Accidente de tránsito leve en esquina principal.',
-          descripcion_ampliada:
-            'Un motorizado sufrió una caída al evitar chocar con un taxi en la intersección.',
-          fecha: '2025-05-15',
-          imagen: '/accidente1.jpg'
-        },
-        {
-          id_usuario: 2,
-          lugar: 'Parque de los Novios',
-          ciudad: 'Santa Marta',
-          descripcion_breve: 'Robo reportado a turista extranjero.',
-          descripcion_ampliada:
-            'Se reportó que un turista fue despojado de su bolso por dos individuos en moto.',
-          fecha: '2025-05-16',
-          imagen:
-            'https://imgs.search.brave.com/sKqDeFWcY3qjQL38X9SW08bIWfZnJLe_bGNA_xgiyz0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy85/LzkxLzIwMTlfU2Fu/dGFfTWFydGFfLV9F/c3RhdHVhX2RlX0Zy/YW5jaXNjb19kZV9Q/YXVsYV9TYW50YW5k/ZXJfZW5fZWxfUGFy/cXVlX2RlX0xvc19O/b3Zpb3MuanBn'
-        }
-      ],
+      incidentes: [],
       modalVisible: false,
       incidenteSeleccionado: null,
       indiceSeleccionado: null
     };
   },
+  created() {
+    this.obtenerMisNoticias();
+  },
   methods: {
+    async obtenerMisNoticias() {
+      try {
+        const res = await this.axios.get(`http://localhost:5272/api/Noticia/${this.idusuario}`);
+        this.incidentes = res.data;
+      } catch (error) {
+        console.error('Error al obtener noticias:', error);
+      }
+    },
     abrirModal(incidente, index) {
       this.incidenteSeleccionado = { ...incidente };
       this.indiceSeleccionado = index;
@@ -124,9 +111,28 @@ export default {
       this.incidenteSeleccionado = null;
       this.indiceSeleccionado = null;
     },
-    guardarCambios() {
-     console.log(this.incidenteSeleccionado)
-      this.cerrarModal();
+    async guardarCambios() {
+      try {
+        await this.axios.put(`http://localhost:5272/api/Noticia/${this.incidenteSeleccionado.id}`, this.incidenteSeleccionado);
+        this.incidentes[this.indiceSeleccionado] = { ...this.incidenteSeleccionado };
+        this.cerrarModal();
+        alert('Noticia actualizada con éxito.');
+      } catch (error) {
+        console.error('Error al actualizar la noticia:', error);
+        alert('Error al actualizar la noticia.');
+      }
+    },
+    async eliminarNoticia(id, index) {
+      if (confirm('¿Estás seguro de eliminar esta noticia?')) {
+        try {
+          await this.axios.delete(`http://localhost:5272/api/Noticia/${id}`);
+          this.incidentes.splice(index, 1);
+          alert('Noticia eliminada.');
+        } catch (error) {
+          console.error('Error al eliminar la noticia:', error);
+          alert('Error al eliminar la noticia.');
+        }
+      }
     }
   }
 };
@@ -246,5 +252,32 @@ export default {
 }
 .botones-modal button[type='button'] {
   background-color: #ccc;
+}
+.acciones {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  border-top: 1px solid #eee;
+}
+
+.acciones button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.acciones button:hover {
+  opacity: 0.9;
+}
+
+.acciones .eliminar {
+  background-color: #dc2626;
+  color: white;
+}
+
+.acciones .eliminar:hover {
+  background-color: #b91c1c;
 }
 </style>

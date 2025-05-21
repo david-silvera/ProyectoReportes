@@ -15,7 +15,7 @@
           <div class="contenido">
           <h3>{{ incidente.lugar }}</h3>
           <p class="fecha">{{ incidente.fecha }}</p>
-          <p class="descripcion">{{ incidente.descripcion_breve }}</p>
+          <p class="descripcion">{{ incidente.descripcionBreve }}</p>
         </div>
       </div>
     </main>
@@ -44,26 +44,7 @@ export default {
   },
   data() {
     return {
-      incidentes: [
-        {
-          id_usuario: 1,
-          lugar: 'Barrio El Prado',
-          ciudad: 'Santa Marta',
-          descripcion_breve: 'Accidente de tránsito leve en esquina principal.',
-          descripcion_ampliada: 'Un motorizado sufrió una caída al evitar chocar con un taxi en la intersección.',
-          fecha: '2025-05-15',
-          imagen: '/accidente1.jpg'
-        },
-        {
-          id_usuario: 2,
-          lugar: 'Parque de los Novios',
-          ciudad: 'Santa Marta',
-          descripcion_breve: 'Robo reportado a turista extranjero.',
-          descripcion_ampliada: 'Se reportó que un turista fue despojado de su bolso por dos individuos en moto y este aprovecho la distraccion de todos para adueñarse de las pertenencias del turista ',
-          fecha: '2025-05-16',
-          imagen: 'https://imgs.search.brave.com/sKqDeFWcY3qjQL38X9SW08bIWfZnJLe_bGNA_xgiyz0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy85/LzkxLzIwMTlfU2Fu/dGFfTWFydGFfLV9F/c3RhdHVhX2RlX0Zy/YW5jaXNjb19kZV9Q/YXVsYV9TYW50YW5k/ZXJfZW5fZWxfUGFy/cXVlX2RlX0xvc19O/b3Zpb3MuanBn'
-        }
-      ]
+      incidentes: []
     };
   },
   methods: {
@@ -75,13 +56,24 @@ export default {
           ciudad: incidente.ciudad,
           fecha: incidente.fecha,
           imagen: incidente.imagen,
-          descripcion: incidente.descripcion_ampliada,
+          descripcion: incidente.descripcionAmpliada,
           nombre: this.nombre,
           apellido: this.apellido,
           idusuario: this.idusuario
         }
       });
+    },
+     async cargarNoticias() {
+      try {
+        const response = await this.axios.get('http://localhost:5272/api/Noticia');
+        this.incidentes = response.data;  
+      } catch (error) {
+        console.error('Error al cargar noticias:', error);
+      }
     }
+  },
+   created() {
+    this.cargarNoticias();
   }
 };
 </script>

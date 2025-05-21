@@ -99,6 +99,9 @@ export default {
   font-size: 17px;
   line-height: 1.6;
   color: #444;
+   word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 </style>

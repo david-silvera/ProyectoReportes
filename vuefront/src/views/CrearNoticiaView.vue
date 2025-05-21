@@ -7,32 +7,32 @@
     <form @submit.prevent="crearNoticia" class="form-noticia">
       <label>
         Lugar:
-        <input v-model="form.lugar" type="text" required />
+        <input v-model="lugar" type="text" required />
       </label>
 
       <label>
         Ciudad:
-        <input v-model="form.ciudad" type="text" readonly />
+        <input v-model="ciudad" type="text" readonly />
       </label>
 
       <label>
         Descripción breve:
-        <input v-model="form.descripcion_breve" type="text" required />
+        <input v-model="descripcion_breve" type="text" required />
       </label>
 
       <label>
         Descripción ampliada:
-        <textarea v-model="form.descripcion_ampliada" required></textarea>
+        <textarea v-model="descripcion_ampliada" required></textarea>
       </label>
 
       <label>
         Fecha:
-        <input v-model="form.fecha" type="date" required />
+        <input v-model="fecha" type="date" required />
       </label>
 
       <label>
         URL de la imagen:
-        <input v-model="form.imagen" type="url" />
+        <input v-model="imagen" type="url" />
       </label>
 
       <button type="submit">Crear Noticia</button>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+
 import MenuPrincipal from '../components/MenuPrincipal.vue';
 import FooterPrincipal from '../components/FooterPrincipal.vue';
 
@@ -51,14 +52,14 @@ export default {
   components: { MenuPrincipal, FooterPrincipal },
   data() {
     return {
-      form: {
+    
         lugar: '',
         ciudad: 'Santa Marta',
         descripcion_breve: '',
         descripcion_ampliada: '',
         fecha: '',
         imagen: ''
-      }
+      
     };
   },
   computed: {
@@ -73,22 +74,35 @@ export default {
     }
   },
   methods: {
-    crearNoticia() {
+    async crearNoticia() {
       const nuevaNoticia = {
-        id_usuario: this.idusuario,
-        ...this.form
-      };
-      console.log('Nueva noticia creada:', nuevaNoticia);
-      alert('Noticia creada. (Por ahora solo en consola)');
+      usuarioId: this.idusuario,
+      lugar: this.lugar,
+      ciudad: this.ciudad,
+      descripcionBreve: this.descripcion_breve,
+      descripcionAmpliada: this.descripcion_ampliada,
+      fecha: this.fecha,
+      imagen: this.imagen
+};
 
-      this.$router.push({
-        name: 'vistaprincipal',
-        query: {
-          nombre: this.nombre,
-          apellido: this.apellido,
-          idusuario: this.idusuario
-        }
-      });
+      try {
+        const response = await this.axios.post('http://localhost:5272/api/Noticia', nuevaNoticia);
+        alert('Noticia creada exitosamente');
+        console.log(response)
+
+        alert( "Noticia Creada correctamente");
+        this.$router.push({
+          name: 'vistaprincipal',
+          query: {
+            nombre: this.nombre,
+            apellido: this.apellido,
+            idusuario: this.idusuario
+          }
+        });
+
+      } catch (error) {
+        alert('Error al crear la noticia. Revisa la consola.');
+      }
     }
   }
 };
