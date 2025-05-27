@@ -25,6 +25,7 @@ namespace ProyectoApi.Models
         [Required]
         public string DescripcionAmpliada { get; set; }
         [Required]
+        [Column(TypeName = "date")]
         public DateTime Fecha { get; set; }
         [Required]
         public string Imagen { get; set; }

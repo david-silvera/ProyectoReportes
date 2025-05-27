@@ -7,16 +7,12 @@
       "RelativeMoniker": "D:0:0:{06944B6F-8588-4E91-ADA1-316BB909FA46}|ProyectoApi\\ProyectoApi.csproj|solutionrelative:proyectoapi\\controllers\\noticiacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06944B6F-8588-4E91-ADA1-316BB909FA46}|ProyectoApi\\ProyectoApi.csproj|c:\\users\\david\\downloads\\proyectocs\\proyectoapi\\proyectoapi\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06944B6F-8588-4E91-ADA1-316BB909FA46}|ProyectoApi\\ProyectoApi.csproj|solutionrelative:proyectoapi\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{06944B6F-8588-4E91-ADA1-316BB909FA46}|ProyectoApi\\ProyectoApi.csproj|c:\\users\\david\\downloads\\proyectocs\\proyectoapi\\proyectoapi\\models\\noticia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{06944B6F-8588-4E91-ADA1-316BB909FA46}|ProyectoApi\\ProyectoApi.csproj|solutionrelative:proyectoapi\\models\\noticia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06944B6F-8588-4E91-ADA1-316BB909FA46}|ProyectoApi\\ProyectoApi.csproj|c:\\users\\david\\downloads\\proyectocs\\proyectoapi\\proyectoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06944B6F-8588-4E91-ADA1-316BB909FA46}|ProyectoApi\\ProyectoApi.csproj|solutionrelative:proyectoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{06944B6F-8588-4E91-ADA1-316BB909FA46}|ProyectoApi\\ProyectoApi.csproj|c:\\users\\david\\downloads\\proyectocs\\proyectoapi\\proyectoapi\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06944B6F-8588-4E91-ADA1-316BB909FA46}|ProyectoApi\\ProyectoApi.csproj|solutionrelative:proyectoapi\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,31 +22,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Noticia.cs",
               "DocumentMoniker": "C:\\Users\\David\\Downloads\\ProyectoCS\\ProyectoApi\\ProyectoApi\\Models\\Noticia.cs",
               "RelativeDocumentMoniker": "ProyectoApi\\Models\\Noticia.cs",
               "ToolTip": "C:\\Users\\David\\Downloads\\ProyectoCS\\ProyectoApi\\ProyectoApi\\Models\\Noticia.cs",
               "RelativeToolTip": "ProyectoApi\\Models\\Noticia.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAYwBsAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-20T22:04:29.539Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Downloads\\ProyectoCS\\ProyectoApi\\ProyectoApi\\Program.cs",
-              "RelativeDocumentMoniker": "ProyectoApi\\Program.cs",
-              "ToolTip": "C:\\Users\\David\\Downloads\\ProyectoCS\\ProyectoApi\\ProyectoApi\\Program.cs",
-              "RelativeToolTip": "ProyectoApi\\Program.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAowCgAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T20:24:38.603Z"
             },
             {
               "$type": "Document",
@@ -60,20 +44,20 @@
               "RelativeDocumentMoniker": "ProyectoApi\\Controllers\\NoticiaController.cs",
               "ToolTip": "C:\\Users\\David\\Downloads\\ProyectoCS\\ProyectoApi\\ProyectoApi\\Controllers\\NoticiaController.cs",
               "RelativeToolTip": "ProyectoApi\\Controllers\\NoticiaController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-20T19:03:57.014Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "UsuarioController.cs",
               "DocumentMoniker": "C:\\Users\\David\\Downloads\\ProyectoCS\\ProyectoApi\\ProyectoApi\\Controllers\\UsuarioController.cs",
               "RelativeDocumentMoniker": "ProyectoApi\\Controllers\\UsuarioController.cs",
               "ToolTip": "C:\\Users\\David\\Downloads\\ProyectoCS\\ProyectoApi\\ProyectoApi\\Controllers\\UsuarioController.cs",
               "RelativeToolTip": "ProyectoApi\\Controllers\\UsuarioController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAA3wCEAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-20T19:03:36.784Z"
             }

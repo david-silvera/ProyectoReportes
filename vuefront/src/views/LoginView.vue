@@ -1,6 +1,12 @@
 <template>
+  <video class="banner" autoplay loop muted playsinline>
+        <source src="../assets/213102_tiny.mp4" type="video/mp4">
+    </video>
     <div class="login-container">
       <h2 class="login-title">Iniciar Sesión</h2>
+       <div v-if="mensaje" :class="['mensaje', tipoMensaje]">
+      {{ mensaje }}
+      </div>
       <form @submit.prevent="login">
         <label for="username">Usuario</label>
         <input type="text" v-model="username" id="username" placeholder="Tu nombre de usuario" required />
@@ -25,7 +31,9 @@ export default {
     return {
       username: '',
       password: '',
-      usuarios:[]
+      usuarios:[],
+       mensaje: "",
+      tipoMensaje: "", 
     };
   },
   methods: {
@@ -52,17 +60,21 @@ export default {
       );
 
       if (user) {
-        alert(`Bienvenido, ${user.nombre} ${user.apellido}`);
-        this.$router.push({ 
-        name: 'vistaprincipal', 
-        query: {
-            nombre: user.nombre,
-            apellido: user.apellido,
-            idusuario: user.id
-            }
-      });
-      }else {
-        alert( 'Usuario o contraseña incorrectos');
+        this.mensaje = `Bienvenido, ${user.nombre} ${user.apellido}`;
+        this.tipoMensaje = "success";
+        setTimeout(() => {
+          this.$router.push({
+            name: "vistaprincipal",
+            query: {
+              nombre: user.nombre,
+              apellido: user.apellido,
+              idusuario: user.id,
+            },
+          });
+        }, 1500); 
+      } else {
+        this.mensaje = "Usuario o contraseña incorrectos";
+        this.tipoMensaje = "error";
       }
     },
   },
@@ -74,20 +86,52 @@ export default {
 
   
   <style scoped>
-  
+   * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
   body {
     background-color: #F9FAFB;
   }
+  .banner{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
   
   .login-container {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position:absolute;
+    z-index: 10;
+    top: 8rem;
+    left: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border:1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
     width: 100%;
     max-width: 400px;
     margin: 5rem auto;
+    overflow: hidden;
   }
+  .login-container {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.login-container:hover {
+  transform: scale(1.02);
+}
+
   
   .login-title {
     text-align: center;
@@ -143,5 +187,25 @@ export default {
   .register-link a:hover {
     text-decoration: underline;
   }
+  .mensaje {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.success {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #10b981;
+}
+
+.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #ef4444;
+}
   </style>
   

@@ -45,7 +45,7 @@ namespace ProyectoApi.Migrations
                         .HasColumnType("varchar(250)");
 
                     b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("date");
 
                     b.Property<string>("Imagen")
                         .IsRequired()

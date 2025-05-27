@@ -169,14 +169,29 @@ export default {
 
 
   <style scoped>
+
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+}
+
   .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    padding: 12px 24px;
-  }
+  background-color: #0d47a1;
+  color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
   
   .user-name {
     font-size: 18px;
@@ -192,27 +207,26 @@ export default {
   
   .nav {
     display: flex;
-    justify-content: space-evenly;
-    background-color: #3498db;
-    padding: 12px 0;
+  justify-content: space-around;
+  background-color: #1976d2;
+  padding: 10px 0;
   }
   
   .nav-button {
     background: transparent;
-    border: none;
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 8px 16px;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: background 0.3s;
   }
   
   .nav-button:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
-  /* Modal styles */
+
 .modal-overlay {
   position: fixed;
   top: 0;

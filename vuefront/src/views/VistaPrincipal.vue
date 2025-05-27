@@ -1,10 +1,13 @@
 <template>
   <div class="vista-incidentes">
     <MenuPrincipal :nombre="nombre" :apellido="apellido" :idusuario="idusuario" />
-
-    <h2 class="titulo">Incidentes en Santa Marta</h2>
-
     <main class="contenedor-cartas">
+
+     <h2 class="titulo">Incidentes en Santa Marta</h2>
+  
+         <video class="banner" autoplay loop muted playsinline>
+        <source src="../assets/213102_tiny.mp4" type="video/mp4">
+    </video>
       <div
         class="tarjeta"
         v-for="(incidente, index) in incidentes"
@@ -14,7 +17,7 @@
           <img :src="incidente.imagen" alt="Imagen del incidente" />
           <div class="contenido">
           <h3>{{ incidente.lugar }}</h3>
-          <p class="fecha">{{ incidente.fecha }}</p>
+          <p class="fecha">{{ formatFecha(incidente.fecha) }}</p>
           <p class="descripcion">{{ incidente.descripcionBreve }}</p>
         </div>
       </div>
@@ -48,6 +51,10 @@ export default {
     };
   },
   methods: {
+    formatFecha(fechaISO) {
+    const fecha = new Date(fechaISO);
+    return fecha.toISOString().split('T')[0]; 
+  },
     verDetalle(incidente) {
       this.$router.push({
         name: 'DetalleIncidente',
@@ -79,61 +86,106 @@ export default {
 </script>
 
 <style scoped>
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+   .banner{
+   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none; 
+}
 .vista-incidentes {
   background-color: #f4f4f4;
   min-height: 100vh;
   font-family: Arial, sans-serif;
+   object-fit: cover;
 }
 
 .titulo {
+   grid-column: 1 / -1; 
+  position: relative;
+  z-index: 2; 
   text-align: center;
-  color: #1e3a8a;
-  margin-top: 20px;
+  margin: 20px 0;
+  color:white;
+  font-size: 24px;
+  font-weight: bold;
+  background: none; 
+  padding: 0; 
 }
 
 .contenedor-cartas {
+ position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  padding: 20px;
+  padding: 0 40px 40px;
+  box-sizing: border-box;
+  overflow: hidden; 
+  min-height: 70vh;
+}
+
+@media (max-width: 1200px) {
+  .contenedor-cartas {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .contenedor-cartas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .contenedor-cartas {
+    grid-template-columns: 1fr;
+  }
 }
 
 .tarjeta {
-  background-color: white;
-  padding: 0;
+
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.9); 
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease;
   cursor: pointer;
+  z-index: 1; 
+
 }
 
 .tarjeta:hover {
-  transform: translateY(-4px);
+  transform: scale(1.02);
 }
 
 .tarjeta img {
   width: 100%;
-  height:250px; 
-  object-fit: cover; 
+  height: 180px;
+  object-fit: cover;
 }
 
 .tarjeta .contenido {
-  padding: 12px 16px;
+ padding: 15px;
 }
 
 .tarjeta h3 {
-  margin: 0;
-  color: #1e3a8a;
+   color: #0d47a1;
+  margin: 0 0 10px;
   font-size: 18px;
 }
 
 .tarjeta .fecha {
-  font-size: 14px;
-  color: #444;
-  margin: 6px 0;
+  margin: 0;
+  color: #333;
 }
 
 .tarjeta .descripcion {

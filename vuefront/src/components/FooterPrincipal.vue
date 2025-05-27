@@ -16,14 +16,25 @@
   </script>
   
   <style scoped>
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
   .footer {
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-    font-size: 14px;
-  }
+  background-color: #263238;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  margin-top: auto;
+}
+
+.footer a {
+  color: #90caf9;
+  margin: 0 10px;
+  text-decoration: none;
+}
   
   .enlaces {
     margin-top: 10px;

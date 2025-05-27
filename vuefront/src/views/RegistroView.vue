@@ -1,6 +1,12 @@
 <template>
+  <video class="banner" autoplay loop muted playsinline>
+        <source src="../assets/213102_tiny.mp4" type="video/mp4">
+  </video>
   <div class="register-container">
     <h2 class="register-title">Registro de Usuario</h2>
+     <div v-if="mensaje" :class="['mensaje', tipoMensaje]">
+      {{ mensaje }}
+      </div>
     <form @submit.prevent="register">
       <label for="nombre">Nombre</label>
       <input type="text" v-model="nombre" id="nombre" placeholder="Tu nombre" required />
@@ -36,12 +42,12 @@ export default {
       apellido: "",
       username: "",
       password: "",
-      error: null,
+      mensaje: "",
+      tipoMensaje: "", 
     };
   },
   methods: {
     async register() {
-      this.error = null;
 
       const newUser = {
         nombre: this.nombre,
@@ -56,13 +62,14 @@ export default {
           newUser
         );
         console.log(response)
-        alert( "Usuario registrado correctamente");
+       this.mensaje = `Usuario Registrado`;
+        this.tipoMensaje = "success";
         setTimeout(() => {
           this.$router.push({ name: "loginview" });
         }, 1500);
       } catch (err) {
-        this.error =
-          err.response?.data?.message || "Error al registrar usuario";
+         this.mensaje = "Username ya existe";
+        this.tipoMensaje = "error";
       }
     },
   },
@@ -70,13 +77,46 @@ export default {
 </script>
 
 <style scoped>
+ * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+.banner{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
 .register-container {
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  margin: 5rem auto;
+  position:absolute;
+    z-index: 10;
+    top: 2rem;
+    left: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border:1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 400px;
+    margin: 5rem auto;
+    overflow: hidden;
+}
+.register-container {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.register-container:hover {
+  transform: scale(1.02);
 }
 
 .register-title {
@@ -143,5 +183,25 @@ input[type="password"] {
 
 .login-link a:hover {
   text-decoration: underline;
+}
+ .mensaje {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.success {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #10b981;
+}
+
+.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #ef4444;
 }
 </style>

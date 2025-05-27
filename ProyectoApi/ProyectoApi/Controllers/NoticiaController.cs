@@ -34,7 +34,10 @@ namespace ProyectoApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Noticia>> CrearNoticia(Noticia noticia)
         {
+            noticia.Fecha = noticia.Fecha.Date;
+
             _context.Noticias.Add(noticia);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetNoticias), new { id = noticia.Id }, noticia);
@@ -46,6 +49,7 @@ namespace ProyectoApi.Controllers
             {
                 return BadRequest("El ID proporcionado no coincide con el ID de la noticia.");
             }
+            noticia.Fecha = noticia.Fecha.Date;
 
             _context.Entry(noticia).State = EntityState.Modified;
 
