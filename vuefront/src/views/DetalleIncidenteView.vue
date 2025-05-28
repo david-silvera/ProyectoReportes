@@ -1,7 +1,9 @@
 <template>
+   <MenuPrincipal :nombre="nombre" :apellido="apellido" :idusuario="idusario" />
   <div class="detalle">
-    <MenuPrincipal :nombre="nombre" :apellido="apellido" :idusuario="idusario" />
-
+    <video class="banner" autoplay loop muted playsinline>
+        <source src="../assets/213102_tiny.mp4" type="video/mp4">
+    </video>
     <div class="vista-detalle">
       <h2>{{ lugar }}</h2>
 
@@ -9,16 +11,15 @@
 
       <div class="datos">
         <span>Ciudad: {{ ciudad }}</span>
-        <span>Fecha: {{ fecha }}</span>
+        <span>Fecha: {{ formatFecha(fecha) }}</span>
       </div>
 
       <p class="descripcion-ampliada">
         {{ descripcion }}
       </p>
     </div>
-
-    <FooterPrincipal />
   </div>
+      <FooterPrincipal />
 </template>
 
 
@@ -54,18 +55,45 @@ export default {
     idusario() {
       return this.$route.query.idusuario;
     }
+  },
+  methods:{
+     formatFecha(fechaISO) {
+    const fecha = new Date(fechaISO);
+    return fecha.toISOString().split('T')[0]; 
+  },
   }
 };
 </script>
 
 <style scoped>
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  .detalle{
+    border: 1px solid rgba(0, 0, 0, 0);
+    position: relative;
+  }
+ .banner{
+   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none; 
+}
 .vista-detalle {
   max-width: 900px;
   margin: 40px auto;
   padding: 24px;
-  background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.9); 
   border-radius: 16px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+   object-fit: cover;
+font-family: Arial, sans-serif;
 }
 
 .vista-detalle h2 {
